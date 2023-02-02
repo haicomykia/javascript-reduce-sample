@@ -7,8 +7,7 @@ const kessokuBand = [
 
 console.table(kessokuBand);
 
-const total = kessokuBand.reduce((prev, curr) => {
-    return prev > curr.age ? prev : curr.age
-});
+// 最年少を求める
+const total = kessokuBand.reduce((prev, curr) => prev < curr.age ? prev : curr.age, 120);
 
 console.log(`max age : ${total}`);
