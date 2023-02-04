@@ -5,13 +5,12 @@ class Profie {
 
     constructor(band) {
         this.#band = band;
-        Object.freeze(this.band);
     }
 
     /**
      * @returns 最年長の年齢
      */
-    // functionは不要
+    // メソッドを定義するときはfunctionが不要
     calcMaxAge() {
         return this.#band.reduce((prev, curr) => prev < curr.age ? curr.age : prev, 0);
     }
@@ -43,7 +42,7 @@ class Profie {
      * getter
      */
     get band() {
-        return this.#band;
+        return Object.freeze(this.#band);
     }
 }
 
@@ -59,5 +58,5 @@ let profile = new Profie(kessokuBand);
 console.log(profile.getMaxAgeMember());
 console.log(profile.getMinAgeMember());
 
-// console.table(profile.#band);
-console.table(profile.band);
+const band = profile.band;
+console.table(band);
