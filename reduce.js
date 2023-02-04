@@ -1,3 +1,5 @@
+'use strict';
+
 const kessokuBand = [
     {name: 'Gotoh Hitori', age: 15, part: 'Guitar'},
     {name: 'Kita Ikuyo', age: 16, part: 'Vocal & Guitar'},

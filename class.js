@@ -1,3 +1,5 @@
+'use strict';
+
 class Profie {
 
     // #をつけるとprivateフィールドを定義できる
