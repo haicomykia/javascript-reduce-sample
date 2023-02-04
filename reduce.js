@@ -23,19 +23,27 @@ Profiles.prototype.consoleTable = function () {
 }
 
 // アロー関数を使うべきでない例
-// ここでのthisは呼び出し元のオブジェクトではない
-// Profiles.prototype.sum = () => {
-//     return this.band.reduce((prev, curr) => prev + curr.age, 0);
+// ここでのthisは呼び出し元のオブジェクトではなく
+// 関数宣言時のthisであるグローバルオブジェクト
+// Profiles.prototype.findMaxAgeMember = () => {
+//     const maxAge = this.calcMaxAge();
+//     return this.band.find((member) => member.age === maxAge);
 // }
 
-// functionを使って宣言するとthisは呼び出し元のオブジェクトを指す
-Profiles.prototype.sum = function() {
-    return this.band.reduce((prev, curr) => prev + curr.age, 0);
+// functionを使うと、thisは呼び出し元のオブジェクトが参照される
+Profiles.prototype.findMaxAgeMember = function() {
+    const maxAge = this.calcMaxAge();
+    return this.band.find(member => member.age === maxAge);
 }
 
 const profile = new Profiles(kessokuBand);
 console.log(profile.calcMaxAge());
 console.log(profile.calcMinAge());
-profile.consoleTable();
+console.log(profile.findMaxAgeMember());
 
-console.log(profile.sum());
+
+function test() {
+    console.table(this);
+}
+test(); // this = グローバルオブジェクト
+test.call(kessokuBand); // this = 配列 kessokuBand
