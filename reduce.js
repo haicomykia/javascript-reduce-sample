@@ -5,9 +5,24 @@ const kessokuBand = [
     {name: 'Yamada Ryo', age: 18, part: 'Bass'},
 ];
 
-console.table(kessokuBand);
+function Profiles(kessokuBand) {
+    this.band = kessokuBand;
+    Object.freeze(this);
+} 
 
-// 最年少を求める
-const total = kessokuBand.reduce((prev, curr) => prev < curr.age ? prev : curr.age, 120);
+Profiles.prototype.calcMaxAge = function() {
+    return this.band.reduce((prev, curr) => prev > curr.age ? prev : curr.age, 0);
+}
 
-console.log(`max age : ${total}`);
+Profiles.prototype.calcMinAge = function () {
+    return this.band.reduce((prev, curr) => prev > curr.age ? curr.age : prev, 120);
+}
+
+Profiles.prototype.consoleTable = function () {
+    console.table(this.band);
+}
+
+const profile = new Profiles(kessokuBand);
+console.log(profile.calcMaxAge());
+console.log(profile.calcMinAge());
+profile.consoleTable();
